@@ -1,5 +1,6 @@
 package com.felipediogo.hystrix.routes;
 
+import com.felipediogo.hystrix.commands.BookCommands;
 import com.felipediogo.hystrix.repository.Book;
 import com.felipediogo.hystrix.repository.BookRepository;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("data/v1/")
 public class BookController {
 
-    private BookRepository repository;
-    private GetBooksCommand booksCommand;
+    private final BookRepository repository;
+    private final BookCommands bookCommands;
 
     public BookController(BookRepository repository,
-                          GetBooksCommand booksCommand) {
+                          BookCommands bookCommands) {
         this.repository = repository;
-        this.booksCommand = booksCommand;
+        this.bookCommands = bookCommands;
     }
 
     @GetMapping(value = "/books/{id}")
     public ResponseEntity<Book> getBooks(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(new GetBooksCommand().execute().get(0));
-//        return repository
-//            .findById(id)
-//            .map(ResponseEntity::ok)
-//            .orElseGet(() -> ResponseEntity.notFound().build());
+        return bookCommands
+            .getBook(id)
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping(value = "/books")

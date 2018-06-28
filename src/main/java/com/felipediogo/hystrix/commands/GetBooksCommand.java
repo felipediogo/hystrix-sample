@@ -1,4 +1,4 @@
-package com.felipediogo.hystrix.routes;
+package com.felipediogo.hystrix.commands;
 
 import com.felipediogo.hystrix.repository.Book;
 import com.netflix.hystrix.HystrixCommand;
