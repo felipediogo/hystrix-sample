@@ -27,6 +27,14 @@ public class BookCommands {
             .findById(id);
     }
 
+    public void postBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    public void postBookFallback(Book book) {
+        bookRepository.save(book);
+    }
+
     public Optional<Book> getFallbackBook(Integer id) {
         Book book = new Book();
         book.setId(2);
