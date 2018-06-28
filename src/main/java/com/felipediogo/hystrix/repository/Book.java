@@ -1,10 +1,24 @@
-package com.felipediogo.hystrix.routes;
+package com.felipediogo.hystrix.repository;
 
-public class Book {
+import org.springframework.data.redis.core.RedisHash;
+
+import java.io.Serializable;
+
+@RedisHash("Book")
+public class Book implements Serializable {
+    private Integer id;
     private String title;
     private String author;
     private String publisher;
     private Double value;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

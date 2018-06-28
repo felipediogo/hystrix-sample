@@ -1,5 +1,6 @@
 package com.felipediogo.hystrix.routes;
 
+import com.felipediogo.hystrix.repository.Book;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,7 @@ public class GetBooksCommand extends HystrixCommand<List<Book>> {
 
     private Book buildBook() {
         Book book = new Book();
+        book.setId(1);
         book.setAuthor("George R. R. Martin");
         book.setTitle("Game of Thrones");
         book.setPublisher("Editora Teste");
@@ -41,6 +43,7 @@ public class GetBooksCommand extends HystrixCommand<List<Book>> {
 
     private Book buildFallbackBooks() {
         Book book = new Book();
+        book.setId(2);
         book.setAuthor("DEFAULT");
         book.setTitle("DEFAULT");
         book.setPublisher("DEFAULT");
